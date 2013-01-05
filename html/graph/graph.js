@@ -57,6 +57,9 @@ Graph.prototype = {
     }
     context.globalAlpha = 1.0;
 
+    var shading = context.createLinearGradient( 0, 0, 0, canvas.height );
+    shading.addColorStop( 1, "transparent" );
+
     // Draw the graph for each data source.
     for( var i = 0; i < this.dataSources.length; i++ ) {
 
@@ -86,14 +89,14 @@ Graph.prototype = {
         continue;
       }
 
+      shading.addColorStop( 0, dataSource.fill );
+
       // Apply shading below the line.
       context.lineTo( Math.min( ( x - 1 ) * sectionWidth, canvas.width ), canvas.height );
       context.lineTo( 0, canvas.height );
       context.closePath();
-      context.globalAlpha = 0.5;
-      context.fillStyle = dataSource.fill;
+      context.fillStyle = shading;
       context.fill();
-      context.globalAlpha = 1.0;
 
     }
 
@@ -142,9 +145,9 @@ RandomData.prototype = {
 };
 
 var graph = new Graph( {
-  backgroundColor: "#000",
+  backgroundColor: "#111",
   guideColor: "#333",
-  borderColor: "#fff",
+  borderColor: "#000",
   refreshInterval: 100,
   target: document.getElementsByTagName( "canvas" )[0]
 } );
