@@ -1,3 +1,10 @@
+// Statistics functions.
+Array.prototype.average = function() { return this.reduce( function(a,b) { return a + b; }, 0 ) / this.length; };
+Array.prototype.variance = function() { var average = this.average(); return this.reduce( function( a, b ) { return a + Math.pow( b - average, 2 ); }, 0 ); };
+Array.prototype.standardDeviation = function() { return Math.sqrt( this.variance() ); };
+Array.prototype.max = function() { return this.reduce( function(a,b) { return a > b ? a : b; }, this[0] ); };
+Array.prototype.min = function() { return this.reduce( function(a,b) { return a < b ? a : b; }, this[0] ); };
+
 var Graph = function( parameters ) {
 
   if( !parameters.target ) {
@@ -158,5 +165,4 @@ graph.subscribe( new RandomData( { name: "HDD", stroke: "#ff0", fill: "#550" } )
 
 graph.start();
 
-// TODO: Show mean, median, mode, standard deviation, maximum, and minimum for the data set.
 // TODO: Map the unit values on the x-y axes to ranges for coverage. For example, the x-axis may represent 20 units of time at 100ms each, and the y-axis may represent a percentage of RAM allocated.
