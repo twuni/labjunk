@@ -3,11 +3,21 @@ var graph = {
   backgroundColor: "#000",
   axisColor: "#fff",
   guideColor: "#555",
-  lineColor: "#0f0",
-  areaColor: "#050",
   refreshInterval: 100,
+  dataSources: [],
 
-  renderTo: function( canvas, data ) {
+  addDataSource: function( parameters ) {
+    parameters.stroke = parameters.stroke || "#0f0";
+    parameters.fill = parameters.fill || "#050";
+    parameters.next = parameters.next || function() {
+      return 0;
+    };
+    parameters.limit = parameters.limit || 20;
+    parameters.data = parameters.data || [];
+    graph.dataSources.push( parameters );
+  },
+
+  renderTo: function( canvas ) {
 
     var context = canvas.getContext("2d");
 
@@ -27,26 +37,36 @@ var graph = {
     context.globalAlpha = 1.0;
 
     // Draw data.
+    for( var i = 0; i < graph.dataSources.length; i++ ) {
 
-    context.strokeStyle = graph.lineColor;
-    context.fillStyle = graph.areaColor;
+      var dataSource = graph.dataSources[i];
 
-    context.beginPath();
-    context.moveTo( 0, canvas.height );
-    var sectionWidth = canvas.width / ( data.length - 1 );
-    for( var x = 0; x < data.length; x++ ) {
-      context.lineTo( sectionWidth * x, canvas.height - ( data[x] * canvas.height ) );
+      dataSource.data.push( dataSource.next() );
+      if( dataSource.data.length >= dataSource.limit ) {
+        dataSource.data.shift();
+      }
+
+      context.strokeStyle = dataSource.stroke;
+      context.fillStyle = dataSource.fill;
+
+      context.beginPath();
+      context.moveTo( 0, canvas.height );
+      var sectionWidth = canvas.width / ( dataSource.limit - 2 );
+      for( var x = 0; x < dataSource.data.length; x++ ) {
+        context.lineTo( sectionWidth * x, canvas.height - ( dataSource.data[x] * canvas.height ) );
+      }
+      context.stroke();
+
+      // Fill in the area below the data.
+
+      context.lineTo( canvas.width, canvas.height );
+      context.lineTo( 0, canvas.height );
+      context.closePath();
+      context.globalAlpha = 0.5;
+      context.fill();
+      context.globalAlpha = 1.0;
+
     }
-    context.stroke();
-
-    // Fill in the area below the data.
-
-    context.lineTo( canvas.width, canvas.height );
-    context.lineTo( 0, canvas.height );
-    context.closePath();
-    context.globalAlpha = 0.5;
-    context.fill();
-    context.globalAlpha = 1.0;
 
     // Draw axes.
 
@@ -60,25 +80,34 @@ var graph = {
 };
 
 ( function( parameters ) {
-  var data = [];
+
+  var samples = [
+    [ "#0f0", "#050" ],
+    [ "#f00", "#500" ],
+    [ "#ff0", "#550" ]
+  ];
+
+  for( var i = 0; i < samples.length; i++ ) {
+    graph.addDataSource( {
+      stroke: samples[i][0],
+      fill: samples[i][1] || "transparent",
+      next: ( function() {
+        var y = Math.random();
+        return function() {
+          var dy = -0.1 + Math.random() * 0.2;
+          y = Math.min( Math.max( 0, y + dy ), 1 );
+          return y;
+        };
+      } )()
+    } );
+  };
+
   var interval = setInterval( function() {
-    graph.renderTo( parameters.canvas, data );
-    data.push( parameters.nextValue() );
-    if( data.length >= 20 ) {
-      data.shift();
-    }
+    graph.renderTo( parameters.canvas );
   }, graph.refreshInterval );
 
 } )( {
   canvas: document.getElementsByTagName("canvas")[0],
-  nextValue: ( function() {
-    var y = 0.5;
-    return function() {
-      var dy = -0.1 + Math.random() * 0.2;
-      y = Math.min( Math.max( 0, y + dy ), 1 );
-      return y;
-    };
-  } )()
 } );
 
 // TODO: Show mean, median, mode, standard deviation, maximum, and minimum for the data set.
