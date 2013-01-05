@@ -7,8 +7,8 @@ var graph = {
   dataSources: [],
 
   addDataSource: function( parameters ) {
-    parameters.stroke = parameters.stroke || "#0f0";
-    parameters.fill = parameters.fill || "#050";
+    parameters.stroke = parameters.stroke || "transparent";
+    parameters.fill = parameters.fill || "transparent";
     parameters.next = parameters.next || function() {
       return 0;
     };
@@ -59,7 +59,7 @@ var graph = {
 
       // Fill in the area below the data.
 
-      context.lineTo( canvas.width, canvas.height );
+      context.lineTo( Math.min( ( x - 1 ) * sectionWidth, canvas.width ), canvas.height );
       context.lineTo( 0, canvas.height );
       context.closePath();
       context.globalAlpha = 0.5;
@@ -81,26 +81,25 @@ var graph = {
 
 ( function( parameters ) {
 
-  var samples = [
-    [ "#0f0", "#050" ],
-    [ "#f00", "#500" ],
-    [ "#ff0", "#550" ]
-  ];
+  graph.renderTo( parameters.canvas );
 
-  for( var i = 0; i < samples.length; i++ ) {
-    graph.addDataSource( {
-      stroke: samples[i][0],
-      fill: samples[i][1] || "transparent",
-      next: ( function() {
-        var y = Math.random();
-        return function() {
-          var dy = -0.1 + Math.random() * 0.2;
-          y = Math.min( Math.max( 0, y + dy ), 1 );
-          return y;
-        };
-      } )()
-    } );
+  var RandomData = function( stroke, fill ) {
+    this.stroke = stroke || "transparent";
+    this.fill = fill || "transparent";
+    this.currentValue = Math.random();// Initial value.
   };
+
+  RandomData.prototype = {
+    next: function() {
+      var dy = -0.1 + Math.random() * 0.2;
+      this.currentValue = Math.min( Math.max( 0, this.currentValue + dy ), 1 );
+      return this.currentValue;
+    }
+  };
+
+  graph.addDataSource( new RandomData( "#0f0", "#050" ) );
+  graph.addDataSource( new RandomData( "#f00", "#500" ) );
+  graph.addDataSource( new RandomData( "#ff0", "#550" ) );
 
   var interval = setInterval( function() {
     graph.renderTo( parameters.canvas );
