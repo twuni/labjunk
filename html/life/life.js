@@ -1,3 +1,26 @@
+var cursor = {
+  x: -1,
+  y: -1,
+  active: false,
+  track: function(event) {
+    cursor.x = parseInt( ( event.pageX / innerWidth ) * environment.width / blockSize );
+    cursor.y = parseInt( ( event.pageY / innerHeight ) * environment.height / blockSize );
+    if( cursor.active ) {
+      grid[cursor.y][cursor.x] = 1;
+    }
+    var context = environment.getContext("2d");
+    context.fillStyle = "#fff";
+    context.globalAlpha = 0.1;
+    context.fillRect( cursor.x * blockSize, cursor.y * blockSize, blockSize, blockSize );
+  }
+};
+
+var paused = false;
+var delayedStart = undefined;
+addEventListener( "mousemove", cursor.track );
+addEventListener( "mousedown", function() { cursor.active = true; paused = true; clearTimeout(delayedStart); } );
+addEventListener( "mouseup", function() { cursor.active = false; delayedStart = setTimeout( function() { paused = false; }, 1000 ); } );
+
 function generate( width, height, density ) {
   var grid = [];
   for( var y = 0; y < height; y++ ) {
@@ -42,11 +65,31 @@ function update(grid) {
 function draw( canvas, size ) {
   if( !size ) { size = 1; }
   var context = canvas.getContext("2d");
+  context.fillStyle = "#010";
+  context.globalAlpha = 1;
+  context.fillRect( 0, 0, canvas.width, canvas.height );
+  context.shadowOffsetX = 1;
+  context.shadowOffsetY = 1;
+  context.shadowBlur = 1;
+  context.shadowColor = "#000";
   for( var y = 0; y < grid.length; y++ ) {
     for( var x = 0; x < grid[y].length; x++ ) {
-      context.fillStyle = grid[y][x] == 1 ? "#050" : "#010";
+      if( grid[y][x] == 0 ) {
+        continue;
+      }
+      context.fillStyle = "#050";
+      context.globalAlpha = 1;
       context.fillRect( x * size, y * size, size, size );
     }
+  }
+  context.fillStyle = "#555";
+  for( var y = 0; y < grid.length; y++ ) {
+    context.globalAlpha = 0.2;
+    context.fillRect( 0, y * blockSize, canvas.width, 1 );
+  }
+  for( var x = 0; x < grid[0].length; x++ ) {
+    context.globalAlpha = 0.2;
+    context.fillRect( x * blockSize, 0, 1, canvas.height );
   }
 }
 
@@ -62,10 +105,15 @@ var debug = ( function( then ) {
 } )( new Date().getTime() );
 
 var blockSize = 8;
-var canvas = document.getElementsByTagName("canvas")[0];
-var grid = generate( canvas.width / blockSize, canvas.height / blockSize, 0.5 );
+var environment = document.getElementById("environment");
+environment.width = window.innerWidth;
+environment.height = window.innerHeight;
+var grid = generate( environment.width / blockSize, environment.height / blockSize, 0.1 );
 
 setInterval( function() {
-  update(grid);
-  draw( canvas, blockSize );
+  if( !paused ) {
+    update( grid );
+  }
+  draw( environment, blockSize );
 }, 1000 / 10 );
+
