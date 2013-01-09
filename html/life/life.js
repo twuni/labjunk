@@ -1,3 +1,22 @@
+var CONFIG = {
+  blending: "average",
+  density: "0.1"
+};
+
+( function() {
+  var tokens = location.search.substring(1).split(/[=&]/);
+  for( var i = 0; i < tokens.length; i += 2 ) {
+    CONFIG[tokens[i]] = tokens[i+1];
+  }
+} )();
+
+if( !/(add|multiply|average|sumproduct)/.test(CONFIG.blending) ) {
+  CONFIG.blending = "average";
+}
+
+if( isNaN(CONFIG.density) ) { CONFIG.density = "0.1"; }
+CONFIG.density = parseFloat(CONFIG.density);
+
 var Color = function() {
   switch( arguments.length ) {
     case 1:
@@ -48,7 +67,7 @@ Color.random = function() {
     /**
      * @return a new color that adds, then multiplies this color and another color.
      */
-    psychedelic: function( another ) {
+    sumproduct: function( another ) {
       return this.multiply( another ).add( another );
     },
 
@@ -98,7 +117,7 @@ var cursor = {
     }
     var context = environment.getContext("2d");
     context.fillStyle = "#fff";
-    context.globalAlpha = 0.1;
+    context.globalAlpha = 0.25;
     context.fillRect( cursor.x * blockSize, cursor.y * blockSize, blockSize, blockSize );
   }
 };
@@ -150,9 +169,9 @@ function update(grid) {
       }
 
       if( grid[y][x].fate.alive ) {
-        grid[y][x].fate.color = grid[y][x].color;
-        for( var i = 0; i < support.length; i++ ) {
-          grid[y][x].fate.color = grid[y][x].fate.color.psychedelic( support[i].color );
+        grid[y][x].fate.color = support[0].color;
+        for( var i = 1; i < support.length; i++ ) {
+          grid[y][x].fate.color = grid[y][x].fate.color[CONFIG.blending]( support[i].color );
         }
       }
 
@@ -176,7 +195,7 @@ function draw( canvas, size ) {
   var context = canvas.getContext("2d");
 
   context.fillStyle = "#010";
-  context.globalAlpha = 0.1;
+  context.globalAlpha = 0.25;
   context.fillRect( 0, 0, canvas.width, canvas.height );
 
   context.shadowOffsetX = 1;
@@ -224,7 +243,7 @@ var blockSize = 8;
 var environment = document.getElementById("environment");
 environment.width = window.innerWidth;
 environment.height = window.innerHeight;
-var grid = generate( environment.width / blockSize, environment.height / blockSize, 0.1 );
+var grid = generate( environment.width / blockSize, environment.height / blockSize, CONFIG.density );
 
 requestAnimationFrame( function() {
   requestAnimationFrame( arguments.callee );
