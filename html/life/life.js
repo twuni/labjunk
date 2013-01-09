@@ -17,6 +17,9 @@ CONFIG.density = parseFloat(CONFIG.density);
 if( isNaN(CONFIG.decay) ) { CONFIG.decay = "3"; }
 CONFIG.decay = parseInt(CONFIG.decay);
 
+if( isNaN(CONFIG.speed) ) { CONFIG.speed = "100"; }
+CONFIG.speed = parseInt(CONFIG.speed);
+
 var Color = function() {
   switch( arguments.length ) {
     case 1:
@@ -254,4 +257,4 @@ setInterval( function() {
   if( !paused ) {
     update( grid );
   }
-}, 100 );
+}, CONFIG.speed );
