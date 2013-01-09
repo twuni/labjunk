@@ -1,4 +1,4 @@
-# Twuni Lab Junk
+# Twuni Labs
 
 This is my junk drawer of experiments, prototypes, and tiny projects.
 Stuff in here is generally the result of trying to learn something new,
