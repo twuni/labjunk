@@ -66,7 +66,7 @@ function draw( canvas, size ) {
   if( !size ) { size = 1; }
   var context = canvas.getContext("2d");
   context.fillStyle = "#010";
-  context.globalAlpha = 1;
+  context.globalAlpha = 0.1;
   context.fillRect( 0, 0, canvas.width, canvas.height );
   context.shadowOffsetX = 1;
   context.shadowOffsetY = 1;
@@ -110,10 +110,13 @@ environment.width = window.innerWidth;
 environment.height = window.innerHeight;
 var grid = generate( environment.width / blockSize, environment.height / blockSize, 0.1 );
 
+requestAnimationFrame( function() {
+  requestAnimationFrame( arguments.callee );
+  draw( environment, blockSize );
+} );
+
 setInterval( function() {
   if( !paused ) {
     update( grid );
   }
-  draw( environment, blockSize );
-}, 1000 / 10 );
-
+}, 100 );
