@@ -45,7 +45,7 @@ $( function() {
   scene.add( camera );
 
   var sphere = new THREE.Mesh( new THREE.SphereGeometry( 50, 16, 16 ), new THREE.MeshLambertMaterial( {
-    map: THREE.ImageUtils.loadTexture("grass.png")
+    map: THREE.ImageUtils.loadTexture("earth.jpg")
   } ) );
   scene.add( sphere );
 
