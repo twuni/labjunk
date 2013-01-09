@@ -59,7 +59,7 @@ $( function() {
 
   ( function() {
     requestAnimationFrame( arguments.callee );
-    sphere.rotation.y += 0.01;
+    sphere.rotation.y += 0.001;
     renderer.render( scene, camera );
   } )();
 
