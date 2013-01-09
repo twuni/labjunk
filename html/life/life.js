@@ -172,7 +172,7 @@ function update(grid) {
       }
 
       if( grid[y][x].fate.alive ) {
-        grid[y][x].fate.color = support[0].color;
+        grid[y][x].fate.color = new Color( support[0].color.value );
         for( var i = 1; i < support.length; i++ ) {
           grid[y][x].fate.color = grid[y][x].fate.color[CONFIG.blending]( support[i].color );
         }
