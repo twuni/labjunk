@@ -44,8 +44,10 @@ $( function() {
   var scene = new THREE.Scene();
   scene.add( camera );
 
-  var sphere = new THREE.Mesh( new THREE.SphereGeometry( 50, 16, 16 ), new THREE.MeshLambertMaterial( {
-    map: THREE.ImageUtils.loadTexture("earth.jpg")
+  var sphere = new THREE.Mesh( new THREE.SphereGeometry( 50, 16, 16 ), new THREE.MeshPhongMaterial( {
+    map: THREE.ImageUtils.loadTexture("earth_texture.jpg"),
+    specularMap: THREE.ImageUtils.loadTexture("earth_spec.jpg"),
+    bumpMap: THREE.ImageUtils.loadTexture("earth_bump.jpg")
   } ) );
   scene.add( sphere );
 
