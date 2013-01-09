@@ -1,6 +1,20 @@
 $( function() {
 
-  var renderer = new THREE.WebGLRenderer();
+  var hasWebGL = ( function() {
+
+    var canvas = document.createElement("canvas"), gl = null;
+
+    try { gl = canvas.getContext("webgl"); } catch(x) { gl = null; }
+
+    if( gl == null ) {
+      try { gl = canvas.getContext("experimental-webgl"); } catch(x) { gl = null; }
+    }
+
+    return gl !== null;
+
+  } )();
+
+  var renderer = hasWebGL ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer({overdraw:true});
   renderer.setSize( window.innerWidth, window.innerHeight );
 
   var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
