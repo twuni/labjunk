@@ -1,7 +1,4 @@
-var CONFIG = {
-  blending: "average",
-  density: "0.1"
-};
+var CONFIG = {};
 
 ( function() {
   var tokens = location.search.substring(1).split(/[=&]/);
@@ -16,6 +13,9 @@ if( !/(add|multiply|average|sumproduct)/.test(CONFIG.blending) ) {
 
 if( isNaN(CONFIG.density) ) { CONFIG.density = "0.1"; }
 CONFIG.density = parseFloat(CONFIG.density);
+
+if( isNaN(CONFIG.decay) ) { CONFIG.decay = "3"; }
+CONFIG.decay = parseInt(CONFIG.decay);
 
 var Color = function() {
   switch( arguments.length ) {
@@ -195,7 +195,7 @@ function draw( canvas, size ) {
   var context = canvas.getContext("2d");
 
   context.fillStyle = "#010";
-  context.globalAlpha = 0.25;
+  context.globalAlpha = 1 / ( CONFIG.decay + 1 );
   context.fillRect( 0, 0, canvas.width, canvas.height );
 
   context.shadowOffsetX = 1;
