@@ -113,7 +113,7 @@ var cursor = {
     cursor.y = parseInt( ( event.pageY / innerHeight ) * environment.height / blockSize );
     if( cursor.active ) {
       grid[cursor.y][cursor.x].alive = true;
-      grid[cursor.y][cursor.x].color = cursor.color;
+      grid[cursor.y][cursor.x].color = new Color( cursor.color.value );
     }
     var context = environment.getContext("2d");
     context.fillStyle = "#fff";
