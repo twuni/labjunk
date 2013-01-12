@@ -15,3 +15,4 @@ You can control the simulation's behavior and initial conditions via querystring
    * **sumproduct**: The color a cell is determined by summing the product of the colors of its neighbors. [Example](http://labs.twuni.org/life/?blending=sumproduct)
  * `density`: This determines the density of the initial, randomly generated state. Must be a number between 0 and 1. (default: **0.1**) [Example](http://labs.twuni.org/life/?density=0.1)
  * `decay`: This determines how many animation frames it takes for a dead cell to fade away. (default: **3**) [Example](http://labs.twuni.org/life/?decay=3)
+ * `size`: This determines the size of each cell (in pixels). (default: **8**) [Example](http://labs.twuni.org/life/?size=8)
