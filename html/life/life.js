@@ -20,6 +20,9 @@ CONFIG.decay = parseInt(CONFIG.decay);
 if( isNaN(CONFIG.speed) ) { CONFIG.speed = "100"; }
 CONFIG.speed = parseInt(CONFIG.speed);
 
+if( isNaN(CONFIG.size) ) { CONFIG.size = "8"; }
+CONFIG.size = parseInt(CONFIG.size);
+
 var Color = function() {
   switch( arguments.length ) {
     case 1:
@@ -112,8 +115,8 @@ var cursor = {
   active: false,
   color: new Color( 0xFFFFFF ),
   track: function(event) {
-    cursor.x = parseInt( ( event.pageX / innerWidth ) * environment.width / blockSize );
-    cursor.y = parseInt( ( event.pageY / innerHeight ) * environment.height / blockSize );
+    cursor.x = parseInt( ( event.pageX / innerWidth ) * environment.width / CONFIG.size );
+    cursor.y = parseInt( ( event.pageY / innerHeight ) * environment.height / CONFIG.size );
     if( cursor.active ) {
       grid[cursor.y][cursor.x].alive = true;
       grid[cursor.y][cursor.x].color = new Color( cursor.color.value );
@@ -121,7 +124,7 @@ var cursor = {
     var context = environment.getContext("2d");
     context.fillStyle = "#fff";
     context.globalAlpha = 0.25;
-    context.fillRect( cursor.x * blockSize, cursor.y * blockSize, blockSize, blockSize );
+    context.fillRect( cursor.x * CONFIG.size, cursor.y * CONFIG.size, CONFIG.size, CONFIG.size );
   }
 };
 
@@ -220,13 +223,13 @@ function draw( canvas, size ) {
   for( var y = 0; y < grid.length; y++ ) {
     context.fillStyle = "#555";
     context.globalAlpha = 0.2;
-    context.fillRect( 0, y * blockSize, canvas.width, 1 );
+    context.fillRect( 0, y * size, canvas.width, 1 );
   }
 
   for( var x = 0; x < grid[0].length; x++ ) {
     context.fillStyle = "#555";
     context.globalAlpha = 0.2;
-    context.fillRect( x * blockSize, 0, 1, canvas.height );
+    context.fillRect( x * size, 0, 1, canvas.height );
   }
 
 }
@@ -242,15 +245,14 @@ var debug = ( function( then ) {
   };
 } )( new Date().getTime() );
 
-var blockSize = 8;
 var environment = document.getElementById("environment");
 environment.width = window.innerWidth;
 environment.height = window.innerHeight;
-var grid = generate( environment.width / blockSize, environment.height / blockSize, CONFIG.density );
+var grid = generate( environment.width / CONFIG.size, environment.height / CONFIG.size, CONFIG.density );
 
 requestAnimationFrame( function() {
   requestAnimationFrame( arguments.callee );
-  draw( environment, blockSize );
+  draw( environment, CONFIG.size );
 } );
 
 setInterval( function() {
