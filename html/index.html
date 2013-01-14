@@ -1,26 +1,179 @@
 <!DOCTYPE html>
 <html lang="en_US">
   <head>
-    <title>Internet</title>
-    <style>
-      html { background-color: #900; color: #400; overflow: hidden; font: italic 20px Geneva, Trebuchet, Tahoma, sans-serif; }
-      body { position: absolute; margin-top: 20%; text-align: center; width: 100%; }
-      ul, li { list-style: none; padding: 0; margin: 0; display: inline-block; }
-      a { background-color: #855; color: #fdd; display: inline-block; padding: 0 8px; text-decoration: none; font: normal 20px serif; }
-      a:hover { background-color: #522; color: #ecc; }
-      a.code { background-color: #585; color: #dfd; }
-      a.code:hover { background-color: #252; color: #cec; }
-    </style>
+    <title>Labs | Twuni</title>
+    <link rel="stylesheet" href="index.css"/>
   </head>
   <body>
-    <p>Welcome to the Internet.</p>
-    <ul>
-      <li><a href="/life/">foo</a></li>
-      <li><a href="/project-hosting/">bar</a></li>
-      <li><a href="/graph/">baz</a></li>
-      <li><a href="/3d/">fek</a></li>
-    </ul>
-    <p><a class="code" href="https://github.com/twuni/labjunk">fork</a></p>
-  </body>
-</html>
 
+    <header>
+      <h1>Twuni</h1>
+      <h2>Labs</h2>
+    </header>
+
+    <article>
+
+      <ul class="tags">
+        <li>JavaScript</li>
+        <li>HTML5</li>
+        <li>Canvas</li>
+      </ul>
+
+      <h3>Conway's Game of Life</h3>
+
+      <p>
+        <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway's Game of Life</a> is a cellular automaton
+        devised by the British mathematician John Horton Conway in 1970. It features an infinitely large two-dimensional
+        array consisting of cells which must be in either of two states: dead or alive. The rules for determining whether
+        a cell lives or dies are dependent upon the surrounding cells. For example, in the standard game of life, a cell
+        survives a generation only if it has exactly 2 or 3 living neighbors. A dead cell is brought to life only if it has
+        exactly 3 living neighbors.
+      </p>
+
+      <p>
+        This simulation differs from the classic game of life in that it uses a toroidal array. That is, instead of having
+        unlimited space to grow, cells are bound to finite dimensions based on the amount of space available on the screen.
+      </p>
+
+      <iframe id="life"></iframe>
+
+      <form action="life/index.html" method="get" target="life" id="form_life">
+
+        <fieldset>
+
+          <legend>Performance</legend>
+
+          <label for="life_shadows">Disable Shadows</label>
+          <input id="life_shadows" type="checkbox" name="shadows" value="no"/>
+
+          <label for="life_grid">Disable Grid</label>
+          <input id="life_grid" type="checkbox" name="grid" value="no"/>
+
+        </fieldset>
+
+        <fieldset>
+
+          <legend>Initial Conditions</legend>
+
+          <label for="life_density">Population Density</label>
+          <input id="life_density" type="text" name="density" value="0.25"/>
+
+        </fieldset>
+
+        <fieldset>
+
+          <legend>Behavior</legend>
+
+          <label for="life_b">Birth Rule</label>
+          <input id="life_b" type="text" name="b" value="3"/>
+
+          <label for="life_s">Survival Rule</label>
+          <input id="life_s" type="text" name="s" value="23"/>
+
+          <label for="life_blending">Breeding Method</label>
+          <select id="life_blending" name="blending">
+            <option value="average">average</option>
+            <option value="add">add</option>
+            <option value="multiply">multiply</option>
+            <option value="sumproduct">sumproduct</option>
+            <option value="monotone">monotone</option>
+          </select>
+
+        </fieldset>
+
+        <fieldset>
+
+          <legend>Rendering</legend>
+
+          <label for="life_decay">Decay (frames)</label>
+          <input id="life_decay" type="text" name="decay" value="3"/>
+
+          <label for="life_speed">Speed (ms)</label>
+          <input id="life_speed" type="text" name="speed" value="100"/>
+
+          <label for="life_size">Cell Size (px)</label>
+          <input id="life_size" type="text" name="size" value="16"/>
+
+          <label for="life_pause">Pause Time (ms)</label>
+          <input id="life_pause" type="text" name="pause" value="1000"/>
+
+        </fieldset>
+
+        <button type="submit">Play</button>
+
+      </form>
+
+      <script>
+        document.getElementById("form_life").submit();
+      </script>
+
+    </article>
+
+    <article>
+
+      <ul class="tags">
+        <li>JavaScript</li>
+        <li>HTML5</li>
+        <li>WebGL</li>
+        <li>three.js</li>
+      </ul>
+
+      <h3>Earth</h3>
+
+      <p>
+        This is my first foray into three.js. It's a simple simulation of Earth rotating on its axis, with a hook to perform arbitrary planetary rotations.
+      </p>
+
+      <form method="get" action="3d/index.html">
+        <button type="submit">Play</button>
+      </form>
+
+    </article>
+
+    <article>
+
+      <ul class="tags">
+        <li>HTML5</li>
+        <li>CSS</li>
+        <li>Design</li>
+      </ul>
+
+      <h3>Project Hosting</h3>
+
+      <p>
+        This is a mockup for a branded project hosting tool.
+      </p>
+
+      <form method="get" action="project-hosting/index.html">
+        <button type="submit">Play</button>
+      </form>
+
+    </article>
+
+    <article>
+
+      <ul class="tags">
+        <li>JavaScript</li>
+        <li>HTML5</li>
+        <li>Canvas</li>
+      </ul>
+
+      <h3>Real-Time Graph</h3>
+
+      <p>
+        This is a lightweight JavaScript object capable of graphing real-time data.
+      </p>
+
+      <form method="get" action="graph/index.html">
+        <button type="submit">Play</button>
+      </form>
+
+    </article>
+
+    <footer>
+      <a class="code" href="https://github.com/twuni/labjunk">fork</a>
+    </footer>
+
+  </body>
+
+</html>

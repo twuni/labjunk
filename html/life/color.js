@@ -50,7 +50,7 @@ Color.random = function() {
     },
 
     /**
-     * @return a new color that adds, then multiplies this color and another color.
+     * @return a new color that multiplies, then adds this color and another color.
      */
     sumproduct: function( another ) {
       return this.multiply( another ).add( another );

@@ -4,8 +4,10 @@ var cursor = {
   x: -1,
   y: -1,
   active: false,
+  hint: 100,
   color: new Color( 0xFFFFFF ),
   track: function( event ) {
+    cursor.hint = 100;
     var size = CONFIG.size;
     cursor.x = parseInt( ( event.pageX / innerWidth ) * environment.width / size );
     cursor.y = parseInt( ( event.pageY / innerHeight ) * environment.height / size );
@@ -36,7 +38,7 @@ var paused = false;
 
   addEventListener( "mouseup", function() {
     cursor.active = false;
-    delayedStart = setTimeout( function() { paused = false; }, 1000 );
+    delayedStart = setTimeout( function() { paused = false; }, CONFIG.pause );
   } );
 
 } )();
@@ -89,7 +91,7 @@ function update(grid) {
         grid[y][x].fate.alive = grid[y][x].alive;
       }
 
-      if( grid[y][x].fate.alive ) {
+      if( CONFIG.blending !== "monotone" && grid[y][x].fate.alive ) {
         grid[y][x].fate.color = new Color( support[0].color.value );
         for( var i = 1; i < support.length; i++ ) {
           grid[y][x].fate.color = grid[y][x].fate.color[CONFIG.blending]( support[i].color );
@@ -119,37 +121,46 @@ function draw( canvas, size ) {
   context.globalAlpha = 1 / ( CONFIG.decay + 1 );
   context.fillRect( 0, 0, canvas.width, canvas.height );
 
-  context.shadowOffsetX = 1;
-  context.shadowOffsetY = 1;
-  context.shadowBlur = 1;
-  context.shadowColor = "#000";
+  if( CONFIG.shadows === "yes" ) {
+    context.shadowOffsetX = 1;
+    context.shadowOffsetY = 1;
+    context.shadowBlur = 1;
+    context.shadowColor = "#000";
+  }
 
   for( var y = 0; y < grid.length; y++ ) {
     for( var x = 0; x < grid[y].length; x++ ) {
       if( !grid[y][x].alive ) {
         continue;
       }
-      context.fillStyle = grid[y][x].color.toString();
+      context.fillStyle = CONFIG.blending === "monotone" ? "#fff" : grid[y][x].color.toString();
       context.globalAlpha = 1;
       context.fillRect( x * size, y * size, size, size );
     }
   }
 
-  for( var y = 0; y < grid.length; y++ ) {
-    context.fillStyle = "#555";
-    context.globalAlpha = 0.2;
-    context.fillRect( 0, y * size, canvas.width, 1 );
+  if( CONFIG.grid === "yes" ) {
+
+    for( var y = 0; y < grid.length; y++ ) {
+      context.fillStyle = "#555";
+      context.globalAlpha = 0.2;
+      context.fillRect( 0, y * size, canvas.width, 1 );
+    }
+
+    for( var x = 0; x < grid[0].length; x++ ) {
+      context.fillStyle = "#555";
+      context.globalAlpha = 0.2;
+      context.fillRect( x * size, 0, 1, canvas.height );
+    }
+
   }
 
-  for( var x = 0; x < grid[0].length; x++ ) {
-    context.fillStyle = "#555";
-    context.globalAlpha = 0.2;
-    context.fillRect( x * size, 0, 1, canvas.height );
+  if( cursor.hint > 0 ) {
+    context.fillStyle = "#fff";
+    context.globalAlpha = 0.25;
+    context.fillRect( cursor.x * size, cursor.y * size, size, size );
+    cursor.hint--;
   }
-
-  context.fillStyle = "#fff";
-  context.globalAlpha = 0.25;
-  context.fillRect( cursor.x * size, cursor.y * size, size, size );
 
 }
 
