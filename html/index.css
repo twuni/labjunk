@@ -22,9 +22,38 @@ header {
   border-radius: 0 0 4px 4px;
 }
 
+@media only screen and (min-width: 700px) {
+
+  html form fieldset {
+    float: left;
+  }
+
+  html form fieldset div {
+    float: none;
+  }
+
+}
+
+@media only screen and (min-width: 800px) {
+
+  article:nth-child(odd) {
+    clear: left;
+    float: left;
+    width: 45%;
+  }
+
+  article:nth-child(even) {
+    clear: right;
+    float: right;
+    width: 45%;
+  }
+
+}
+
 footer {
   text-align: center;
   padding: 5px 5px 0;
+  clear: both;
 }
 
 footer a {
@@ -57,6 +86,12 @@ article {
   color: #606060;
   padding: 10px;
   box-shadow: 0 1px 0 #aaa;
+}
+
+article.prominent {
+  clear: both;
+  float: none;
+  width: auto;
 }
 
 header h1,
@@ -109,11 +144,15 @@ ul.tags li:hover {
 }
 
 form fieldset {
-  float: left;
   border: none;
   padding: 5px;
   margin: 5px;
   display: block;
+}
+
+form fieldset div {
+  float: left;
+  padding: 2px 8px;
 }
 
 form fieldset legend {
@@ -140,6 +179,7 @@ iframe {
 
 form input[type="text"] {
   border: solid 1px #888;
+  display: block;
   padding: 4px;
   border-radius: 4px 0;
   box-shadow: 2px 2px 0 #ccc;

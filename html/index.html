@@ -12,7 +12,7 @@
       <h2>Labs</h2>
     </header>
 
-    <article>
+    <article class="prominent">
 
       <ul class="tags">
         <li>JavaScript</li>
@@ -44,11 +44,15 @@
 
           <legend>Performance</legend>
 
-          <label for="life_shadows">Disable Shadows</label>
-          <input id="life_shadows" type="checkbox" name="shadows" value="no" checked="checked"/>
+          <div>
+            <label for="life_shadows">Disable Shadows</label>
+            <input id="life_shadows" type="checkbox" name="shadows" value="no" checked="checked"/>
+          </div>
 
-          <label for="life_grid">Disable Grid</label>
-          <input id="life_grid" type="checkbox" name="grid" value="no"/>
+          <div>
+            <label for="life_grid">Disable Grid</label>
+            <input id="life_grid" type="checkbox" name="grid" value="no"/>
+          </div>
 
         </fieldset>
 
@@ -56,8 +60,10 @@
 
           <legend>Initial Conditions</legend>
 
-          <label for="life_density">Population Density</label>
-          <input id="life_density" type="text" name="density" value="0.25"/>
+          <div>
+            <label for="life_density">Population Density</label>
+            <input id="life_density" type="text" name="density" value="0.25"/>
+          </div>
 
         </fieldset>
 
@@ -65,20 +71,26 @@
 
           <legend>Behavior</legend>
 
-          <label for="life_b">Birth Rule</label>
-          <input id="life_b" type="text" name="b" value="3"/>
+          <div>
+            <label for="life_b">Birth Rule</label>
+            <input id="life_b" type="text" name="b" value="3"/>
+          </div>
 
-          <label for="life_s">Survival Rule</label>
-          <input id="life_s" type="text" name="s" value="23"/>
+          <div>
+            <label for="life_s">Survival Rule</label>
+            <input id="life_s" type="text" name="s" value="23"/>
+          </div>
 
-          <label for="life_blending">Breeding Method</label>
-          <select id="life_blending" name="blending">
-            <option value="average">average</option>
-            <option value="add">add</option>
-            <option value="multiply">multiply</option>
-            <option value="sumproduct">sumproduct</option>
-            <option value="monotone">monotone</option>
-          </select>
+          <div>
+            <label for="life_blending">Breeding Method</label>
+            <select id="life_blending" name="blending">
+              <option value="average">average</option>
+              <option value="add">add</option>
+              <option value="multiply">multiply</option>
+              <option value="sumproduct">sumproduct</option>
+              <option value="monotone">monotone</option>
+            </select>
+          </div>
 
         </fieldset>
 
@@ -86,17 +98,25 @@
 
           <legend>Rendering</legend>
 
-          <label for="life_decay">Decay (frames)</label>
-          <input id="life_decay" type="text" name="decay" value="0"/>
+          <div>
+            <label for="life_decay">Decay (frames)</label>
+            <input id="life_decay" type="text" name="decay" value="0"/>
+          </div>
 
-          <label for="life_speed">Speed (ms)</label>
-          <input id="life_speed" type="text" name="speed" value="100"/>
+          <div>
+            <label for="life_speed">Speed (ms)</label>
+            <input id="life_speed" type="text" name="speed" value="100"/>
+          </div>
 
-          <label for="life_size">Cell Size (px)</label>
-          <input id="life_size" type="text" name="size" value="16"/>
+          <div>
+            <label for="life_size">Cell Size (px)</label>
+            <input id="life_size" type="text" name="size" value="16"/>
+          </div>
 
-          <label for="life_pause">Pause Time (ms)</label>
-          <input id="life_pause" type="text" name="pause" value="1000"/>
+          <div>
+            <label for="life_pause">Pause Time (ms)</label>
+            <input id="life_pause" type="text" name="pause" value="1000"/>
+          </div>
 
         </fieldset>
 
