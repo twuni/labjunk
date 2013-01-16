@@ -1,0 +1,61 @@
+html {
+  font: 14px Arial, Helvetica, sans-serif;
+}
+
+header {
+  clear: both;
+}
+
+header h1,
+header h2,
+header h3 {
+  display: inline-block;
+  margin: 0 16px;
+  padding: 0;
+  font-weight: normal;
+}
+
+article {
+  margin: 16px;
+  background: #f0f0f0;
+  color: #303030;
+  font: 8px Consolas, Lucida Console, Courier New, Courier, monospace;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #aaa;
+}
+
+article dl dt,
+article dl dd {
+  font-size: 8px;
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0;
+}
+
+article dl {
+  list-style: none;
+  margin: 8px 4px;
+  padding: 0;
+  clear: both;
+}
+
+article dl dt {
+  font-weight: bold;
+  background: #ddd;
+  width: 100px;
+  border: solid 1px #ccc;
+}
+
+article dl dd {
+  border: solid 1px transparent;
+}
+
+footer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 16px;
+  background-color: #ddd;
+  border-radius: 0 0 0 8px;
+}
