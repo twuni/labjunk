@@ -37,15 +37,18 @@ Movement.prototype.to = function( x, y ) { return new Movement( x, y, this ); };
   on( [ "touchmove", "mousemove"], function(event) {
     var to = event.touches ? event.touches[0] : event;
     movement = movement && movement.to( to.pageX, to.pageY );
+    event.preventDefault();
   }, false );
 
   on( [ "mousedown", "touchstart" ], function(event) {
     var to = event.touches ? event.touches[0] : event;
     movement = new Movement( to.pageX, to.pageY );
+    event.preventDefault();
   }, false );
 
   on( [ "mouseup", "touchend" ], function(event) {
     movement = undefined;
+    event.preventDefault();
   }, false );
 
 } )();
