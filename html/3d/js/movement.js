@@ -30,16 +30,18 @@ Movement.prototype.to = function( x, y ) { return new Movement( x, y, this ); };
       events = [ events ];
     }
     for( var i = 0; i < events.length; i++ ) {
-      addEventListener( events[i], f, false );
+      document.addEventListener( events[i], f, false );
     }
   };
 
   on( [ "touchmove", "mousemove"], function(event) {
-    movement = movement && movement.to( event.pageX, event.pageY );
+    var to = event.touches ? event.touches[0] : event;
+    movement = movement && movement.to( to.pageX, to.pageY );
   }, false );
 
   on( [ "mousedown", "touchstart" ], function(event) {
-    movement = new Movement( event.pageX, event.pageY );
+    var to = event.touches ? event.touches[0] : event;
+    movement = new Movement( to.pageX, to.pageY );
   }, false );
 
   on( [ "mouseup", "touchend" ], function(event) {
