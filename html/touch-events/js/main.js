@@ -1,12 +1,14 @@
 ( function() {
 
-  var events = "touchstart,touchmove,touchend".split(",");
+  var events = ( window.ontouchstart === undefined ? "mousedown,mousemove,mouseup" : "touchstart,touchmove,touchend" ).split(",");
 
   for( var i = 0; i < events.length; i++ ) {
     var section = document.createElement("section");
     section.id = events[i];
     document.getElementById("console").appendChild( section );
   }
+
+  Object.prototype.getType = function() { return Object.prototype.toString.call(this).replace( /^\[object (.+)\]$/, "$1" ); };
 
   var stringify = function( object, chain ) {
 
@@ -18,47 +20,27 @@
       }
     }
 
-    chain.push( object );
-
     var type = typeof(object);
 
-    if( /(string|number)/.test(type) ) {
-      chain.pop();
+    if( !object || /^(boolean|undefined|function|string|number)$/.test(type) || /^(global|HTML.+|DOM.+)$/.test(object.getType()) ) {
       return object;
     }
 
-    if( /(undefined|function)/.test(type) ) {
-      chain.pop();
-      return undefined;
-    }
-
-    if( /(DOM|HTML).+/.test(type) ) {
-      chain.pop();
-      return object;
-    }
-
-    if( object ) {
-      chain.pop();
-      return Object.prototype.toString.call( object );
-    }
-
-    if( /(object)/.test(type) ) {
-      var values = [];
-      if( Object.prototype.toString.call(object) === "[object Array]" ) {
-        for( var i = 0; i < object.length; i++ ) {
-          values.push( arguments.callee(object[i],chain) );
-        }
-      } else {
-        for( var key in object ) {
-          values.push( key + "=" + arguments.callee(object[key],chain) );
-        }
+    var values = [];
+    chain.push( object );
+    if( object.getType() == "Array" ) {
+      for( var i = 0; i < object.length; i++ ) {
+        var value = arguments.callee( object[i], chain );
+        values.push( value );
       }
-      chain.pop();
-      return values.join(",");
+    } else {
+      for( var key in object ) {
+        var value = arguments.callee( object[key], chain );
+        values.push( key + "=" + value );
+      }
     }
-
     chain.pop();
-    return object;
+    return values.join(", ");
 
   };
 
