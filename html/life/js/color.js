@@ -1,7 +1,7 @@
 var Color = function() {
   switch( arguments.length ) {
     case 1:
-      this.value = arguments[0];
+      this.value = arguments[0] instanceof Color ? arguments[0].value : arguments[0];
       break;
     case 3:
       var r = arguments[0], g = arguments[1], b = arguments[2];
@@ -54,6 +54,20 @@ Color.random = function() {
      */
     sumproduct: function( another ) {
       return this.multiply( another ).add( another );
+    },
+
+    /**
+     * @return a new color with the inverted RGB value of this color.
+     */
+    invert: function() {
+      return new Color( 0xFF - this.r(), 0xFF - this.g(), 0xFF - this.b() );
+    },
+
+    /**
+     * @return a new color that has the same value as this color.
+     */
+    clone: function() {
+      return new Color( this );
     },
 
     /**
