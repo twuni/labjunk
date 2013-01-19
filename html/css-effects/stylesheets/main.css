@@ -1,0 +1,48 @@
+html,
+body {
+  background: #eee;
+  color: #333;
+  padding: 0;
+  margin: 0;
+  font: 12px Arial, Helvetica, sans-serif;
+}
+
+header {
+  margin: 0;
+  padding: 8px 16px;
+}
+
+header h1,
+header h2,
+header h3 {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+form {
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+  background: #ddd;
+  color: #333;
+}
+
+form button {
+  transition: all 1s ease-in-out;
+  background: #500;
+  cursor: pointer;
+  color: #fff;
+  border: inset 1px #888;
+  border-radius: 2px;
+  box-shadow: 1px 1px 0 #888;
+  text-shadow: 2px 2px 0 #000;
+  font: normal 12px Arial, Helvetica, sans-serif;
+  display: inline-block;
+  margin: 0;
+  padding: 4px 8px;
+}
+
+form button:hover {
+  background: #900;
+}
