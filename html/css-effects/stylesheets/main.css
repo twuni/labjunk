@@ -46,3 +46,38 @@ form button {
 form button:hover {
   background: #900;
 }
+
+form fieldset {
+  clear: both;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+form fieldset label {
+  clear: left;
+  float: left;
+  width: 120px;
+  line-height: 14px;
+  padding: 6px;
+}
+
+form fieldset label + input {
+  margin-left: 128px;
+}
+
+form input {
+  transition: all 250ms ease-in-out;
+  font: 12px Arial, Helvetica, sans-serif;
+  display: block;
+  padding: 6px;
+  border-radius: 2px;
+  border: solid 1px #aaa;
+  background: #fff;
+  color: #131;
+  margin: 2px;
+}
+
+form input:hover {
+  border-color: #585;
+}
