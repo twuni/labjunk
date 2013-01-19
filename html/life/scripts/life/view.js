@@ -1,7 +1,7 @@
 define( [
   "color",
   "life/model",
-  "polyfill/requestAnimationFrame"
+  "polyfills/requestAnimationFrame"
 ], function( Color, Life ) {
 
   var LifeRenderer = function( parameters ) {
