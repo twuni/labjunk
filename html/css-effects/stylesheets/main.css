@@ -29,7 +29,7 @@ form {
 }
 
 form button {
-  transition: all 1s ease-in-out;
+  transition: all 250ms ease-in-out;
   background: #500;
   cursor: pointer;
   color: #fff;
