@@ -1,12 +1,12 @@
 define( [
   "color",
-  "life",
+  "life/model",
   "polyfill/requestAnimationFrame"
 ], function( Color, Life ) {
 
   var LifeRenderer = function( parameters ) {
 
-    var life = parameters.life || Life.generate();
+    var life = parameters.model || Life.generate();
     var backgroundColor = parameters.backgroundColor || new Color( 0x001000 );
     var foregroundColor = parameters.foregroundColor || backgroundColor.invert();
     var shadows = !!parameters.shadows;

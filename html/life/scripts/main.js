@@ -1,8 +1,8 @@
 require( [
   "parameters",
-  "life",
-  "life_renderer",
-  "life_controller"
+  "life/model",
+  "life/view",
+  "life/controller"
 ], function( Parameters, Life, LifeView, LifeController ) {
 
   var parameters = Parameters.fromQueryString();
@@ -36,7 +36,7 @@ require( [
   } );
 
   var view = new LifeView( {
-    life: model,
+    model: model,
     cursor: cursor,
     gridlines: parameters.grid === "yes",
     shadows: parameters.shadows === "yes",
@@ -45,7 +45,7 @@ require( [
 
   var controller = new LifeController( {
     canvas: canvas,
-    life: model,
+    model: model,
     pause: parameters.pause,
     cursor: cursor
   } );

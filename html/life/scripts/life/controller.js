@@ -1,5 +1,5 @@
 define( [
-  "life",
+  "life/model",
   "color",
   "movement"
 ], function( Life, Color, Movement ) {
@@ -7,7 +7,7 @@ define( [
   var LifeController = function( parameters ) {
 
     var canvas = parameters.canvas;
-    var life = parameters.life || Life.generate();
+    var life = parameters.model || Life.generate();
     var pause = parameters.pause === undefined ? 1000 : parameters.pause;
     var cursor = parameters.cursor || { x: -1, y: -1, decay: 100 };
     var touching = false;
