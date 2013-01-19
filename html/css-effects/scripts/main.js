@@ -1,4 +1,5 @@
 require( [
+  // This should totally work.
   "jquery"
 ], function( $ ) {
 
