@@ -1,4 +1,7 @@
-var Life = ( function() {
+define( [
+  "cell",
+  "color"
+], function( Cell, Color ) {
 
   var NEIGHBORS = [
     [ -1, -1 ],
@@ -129,8 +132,6 @@ var Life = ( function() {
     var survival = parameters.survival || function() { return true; };
     var birth = parameters.birth || function() { return false; };
 
-    console.log( "Life::generate(", parameters, ")" );
-
     var state = [];
 
     for( var y = 0; y < height; y++ ) {
@@ -154,4 +155,4 @@ var Life = ( function() {
 
   return Life;
 
-} )();
+} );

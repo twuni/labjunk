@@ -1,22 +1,25 @@
-var Color = function() {
-  switch( arguments.length ) {
-    case 1:
-      this.value = arguments[0] instanceof Color ? arguments[0].value : arguments[0];
-      break;
-    case 3:
-      var r = arguments[0], g = arguments[1], b = arguments[2];
-      this.value = ( r << 16 ) | ( g << 8 ) | b;
-      break;
-    default:
-      throw "IllegalArgumentException: Valid arguments are (int) and (int,int,int).";
-  }
-};
+define( function() {
 
-Color.random = function() {
-  return new Color( Math.floor( Math.random() * 0xFFFFFF ) );
-};
+  var Color = function() {
+    switch( arguments.length ) {
+      case 0:
+        this.value = 0;
+        break;
+      case 1:
+        this.value = arguments[0] instanceof Color ? arguments[0].value : arguments[0];
+        break;
+      case 3:
+        var r = arguments[0], g = arguments[1], b = arguments[2];
+        this.value = ( r << 16 ) | ( g << 8 ) | b;
+        break;
+      default:
+        throw "IllegalArgumentException: Valid arguments are (), (int), and (int,int,int).";
+    }
+  };
 
-( function() {
+  Color.random = function() {
+    return new Color( Math.floor( Math.random() * 0xFFFFFF ) );
+  };
 
   function mask( color, offset ) {
     return 0xFF & ( color >> ( 8 * offset ) );
@@ -82,4 +85,6 @@ Color.random = function() {
 
   };
 
-} )();
+  return Color;
+
+} );

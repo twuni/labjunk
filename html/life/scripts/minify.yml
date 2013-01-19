@@ -1,0 +1,14 @@
+out: life.min
+in:
+ - polyfill/requestAnimationFrame
+ - polyfill/HTMLCanvasElement_matchBounds
+ - requestAnimationLoop
+ - cell
+ - color
+ - event
+ - life
+ - life_controller
+ - life_renderer
+ - movement
+ - parameters
+ - main
