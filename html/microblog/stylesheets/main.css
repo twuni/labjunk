@@ -1,0 +1,70 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: #eee;
+  color: #333;
+  font: 12px Arial, Helvetica, sans-serif;
+}
+
+header {
+  background: #ddd;
+  border-bottom: solid 1px #ccc;
+  padding: 8px;
+  font-family: Georgia, serif;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+header h1,
+header h2,
+header h3 {
+  font-weight: normal;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+header h2,
+header h3 {
+  float: right;
+  color: #eee;
+}
+
+article {
+  margin: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 1px 2px 0 #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+article section a,
+article section time,
+article section p {
+  margin: 0;
+  padding: 4px;
+  display: block;
+}
+
+article section a,
+article section time {
+  float: left;
+  width: 150px;
+  margin-right: 8px;
+}
+
+article section {
+  clear: left;
+  margin: 0 4px;
+  padding: 0 4px;
+  border-bottom: solid 1px #ccc;
+}
+
+article section p {
+  margin-left: 166px;
+  font: 16px Georgia, serif;
+  color: #666;
+}
+
