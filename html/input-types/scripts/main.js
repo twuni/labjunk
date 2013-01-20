@@ -26,7 +26,7 @@ require( [
 
   } );
 
-  var $submit = $( "<button>" ).attr( "type", "submit" ).text( T.play );
+  var $submit = $( "<button>" ).attr( "type", "submit" ).text( T.button );
 
   $form.append( $submit );
 

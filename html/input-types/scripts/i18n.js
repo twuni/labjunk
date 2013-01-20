@@ -1,4 +1,4 @@
 define( {
   "input": "Input",
-  "play": "Play"
+  "button": "Button"
 } );

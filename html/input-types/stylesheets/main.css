@@ -10,6 +10,9 @@ body {
 header {
   margin: 0;
   padding: 8px 16px;
+  background: #ddd;
+  border-bottom: solid 1px #ccc;
+  color: #bbb;
 }
 
 header h1,
@@ -18,6 +21,14 @@ header h3 {
   display: inline-block;
   padding: 0;
   margin: 0;
+  font-weight: normal;
+  font-family: Georgia, serif;
+}
+
+header h2,
+header h3 {
+  float: right;
+  color: #eee;
 }
 
 form {
@@ -26,6 +37,7 @@ form {
   border-radius: 8px;
   background: #ddd;
   color: #333;
+  box-shadow: 1px 2px 0 #ccc;
 }
 
 form button {
