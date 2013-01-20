@@ -31,6 +31,7 @@ form {
 form button {
   transition: all 250ms ease-in-out;
   background: #000;
+  background: linear-gradient( top, #333 0%, #000 50% );
   cursor: pointer;
   color: #ddd;
   border: solid 1px #ccc;
@@ -47,26 +48,27 @@ form button {
 form button:hover {
   border-color: #080;
   background: #222;
+  background: linear-gradient( bottom, #333 0%, #000 50% );
   text-shadow: #333;
 }
 
 form fieldset {
   clear: both;
   border: none;
-  padding: 0;
-  margin: 0;
+  padding: 4px 0;
+  margin: 4px;
+  border-bottom: solid 1px #ccc;
 }
 
 form fieldset label {
   clear: left;
   float: left;
   width: 120px;
-  height: 26px;
   line-height: 14px;
   padding: 6px;
-  background: #ccc;
   text-align: right;
   text-transform: capitalize;
+  font-weight: bold;
 }
 
 form fieldset label + input {
