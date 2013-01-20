@@ -1,17 +1,17 @@
 require( [
-  // This should totally work.
-  "jquery"
-], function( $ ) {
+  "jquery",
+  "i18n"
+], function( $, T ) {
 
   var $form = $( "<form>" );
 
-  $( "color,date,datetime,datetime-local,email,month,number,range,search,tel,time,url,week".split(",") ).each( function( type ) {
+  $( "color,date,datetime,datetime-local,email,month,number,range,search,tel,time,url,week,password".split(",") ).each( function( i, type ) {
 
     var $input = $( "<input>" ).attr( {
       id: type,
       type: type,
       name: type,
-      placeholder: "Enter " + type + "..."
+      placeholder: T.input + " " + type + "..."
     } );
 
     var $label = $( "<label>" ).attr( {
@@ -24,12 +24,12 @@ require( [
 
     $form.append( $fieldset );
 
-  } ).appendTo( $form );
+  } );
 
-  var $submit = $( "<button>" ).attr( "type", "submit" ).text( "Play" );
+  var $submit = $( "<button>" ).attr( "type", "submit" ).text( T.play );
 
   $form.append( $submit );
 
-  $( "body" ).append( $form );
+  $( "header" ).after( $form );
 
 } );

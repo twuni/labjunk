@@ -30,21 +30,24 @@ form {
 
 form button {
   transition: all 250ms ease-in-out;
-  background: #500;
+  background: #000;
   cursor: pointer;
-  color: #fff;
-  border: inset 1px #888;
+  color: #ddd;
+  border: solid 1px #ccc;
   border-radius: 2px;
   box-shadow: 1px 1px 0 #888;
-  text-shadow: 2px 2px 0 #000;
-  font: normal 12px Arial, Helvetica, sans-serif;
-  display: inline-block;
+  text-shadow: 1px 1px 1px #555;
+  font: normal 16px Arial, Helvetica, sans-serif;
+  display: block;
   margin: 0;
-  padding: 4px 8px;
+  padding: 8px 16px;
+  width: 100%;
 }
 
 form button:hover {
-  background: #900;
+  border-color: #080;
+  background: #222;
+  text-shadow: #333;
 }
 
 form fieldset {
@@ -58,12 +61,16 @@ form fieldset label {
   clear: left;
   float: left;
   width: 120px;
+  height: 26px;
   line-height: 14px;
   padding: 6px;
+  background: #ccc;
+  text-align: right;
+  text-transform: capitalize;
 }
 
 form fieldset label + input {
-  margin-left: 128px;
+  margin-left: 140px;
 }
 
 form input {
@@ -71,13 +78,15 @@ form input {
   font: 12px Arial, Helvetica, sans-serif;
   display: block;
   padding: 6px;
-  border-radius: 2px;
+  border-radius: 4px 2px;
   border: solid 1px #aaa;
   background: #fff;
+  background: linear-gradient( top, #ffffff 0%, #eeeeee 100% );
   color: #131;
   margin: 2px;
 }
 
 form input:hover {
+  background: linear-gradient( bottom, #ffffff 0%, #eeeeee 100% );
   border-color: #585;
 }
