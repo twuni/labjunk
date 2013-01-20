@@ -10,7 +10,7 @@ require( [
     "href": "index.html?author=" + encodeURIComponent( author )
   } ).text( author );
 
-  $.get( "posts/" + author + ".json", function( timeline ) {
+  $.getJSON( "posts/" + author + ".json", function( timeline ) {
     for( var key in timeline ) {
       var $post = $("<section>");
       $post.append( $author.clone() );
