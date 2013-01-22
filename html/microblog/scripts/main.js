@@ -27,7 +27,9 @@ require( [
       $post.append( $author.clone() );
       $post.append( $("<time>").attr( "datetime", key ).text( prettyDate( key ) ) );
       $post.append( $("<p>").text( timeline[key] ) );
+      $post.hide();
       $timeline.append( $post );
+      $post.fadeIn();
     }
   } ).error( function() {
     $timeline.text( "Sorry, " + authorName + " has no posts." );
