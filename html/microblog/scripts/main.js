@@ -3,7 +3,8 @@ require( [
   "prettyDate"
 ], function( $ ) {
 
-  var authorName = decodeURIComponent( location.search.replace( /^.*[&\?]author=([^=&]+)(?:[&\?].*)?$/gi, "$1" ) || "twuni" );
+  var authorPattern = /^.*[&\?]author=([^=&]+)(?:[&\?].*)?$/gi;
+  var authorName = decodeURIComponent( authorPattern.test(location.search) && location.search.replace( authorPattern, "$1" ) || "twuni" );
 
   var $timeline = $("#timeline");
   var $author = $("<a>").attr( {
@@ -21,7 +22,7 @@ require( [
     } );
   } );
 
-  $.getJSON( "posts/" + authorName + ".json", function( timeline ) {
+  $.getJSON( "users/" + authorName + "/posts.json", function( timeline ) {
     for( var key in timeline ) {
       var $post = $("<section>");
       $post.append( $author.clone() );
