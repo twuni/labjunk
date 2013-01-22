@@ -31,13 +31,21 @@ header h3 {
   color: #eee;
 }
 
-article {
-  margin: 8px;
+article section {
+  margin: 8px 8px 8px 54px;
   padding: 8px;
   border-radius: 4px;
   box-shadow: 1px 2px 0 #ccc;
-  background-color: #fff;
+  background: #fff;
+  background: linear-gradient( bottom, #eee 0%, #fff 100% );
   color: #333;
+  position: relative;
+  min-height: 34px;
+}
+
+article section:hover,
+article section:focus {
+  background: linear-gradient( top, #eee 0%, #fff 100% );
 }
 
 article section a,
@@ -48,22 +56,25 @@ article section p {
   display: block;
 }
 
-article section a,
 article section time {
-  float: left;
-  width: 150px;
-  margin-right: 8px;
+  color: #ccc;
+  font-style: italic;
+  float: right;
 }
 
-article section {
-  clear: left;
-  margin: 0 4px;
-  padding: 0 4px;
-  border-bottom: solid 1px #ccc;
+article section a img {
+  border-radius: 2px 4px;
+  box-shadow: 1px 1px 1px #888;
+  border: solid 1px #000;
+}
+
+article section a {
+  float: left;
+  margin-top: -4px;
+  margin-left: -54px;
 }
 
 article section p {
-  margin-left: 166px;
   font: 16px Georgia, serif;
   color: #666;
 }
