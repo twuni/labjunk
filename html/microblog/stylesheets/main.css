@@ -48,27 +48,27 @@ article section:focus {
   background: linear-gradient( top, #eee 0%, #fff 100% );
 }
 
-article section a,
-article section time,
-article section p {
+article section > a,
+article section > time,
+article section > p {
   margin: 0;
   padding: 4px;
   display: block;
 }
 
-article section time {
+article section > time {
   color: #ccc;
   font-style: italic;
   float: right;
 }
 
-article section a img {
+article section > a img {
   border-radius: 2px 4px;
   box-shadow: 1px 1px 1px #888;
   border: solid 1px #000;
 }
 
-article section a {
+article section > a {
   float: left;
   margin-top: -4px;
   margin-left: -54px;
@@ -79,3 +79,25 @@ article section p {
   color: #666;
 }
 
+article section p code {
+  background-color: #e0efe0;
+  color: #353;
+  font-family: Consolas, Lucida Console, Courier, monospace;
+  display: inline-block;
+  padding: 2px 4px;
+  margin: 0 2px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 0 #ccc;
+}
+
+article section p a {
+  text-decoration: none;
+}
+
+article section p a[rel="topic"] {
+  color: #222;
+}
+
+article section p a[rel="author"] {
+  color: #789;
+}
