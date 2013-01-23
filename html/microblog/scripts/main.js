@@ -9,10 +9,27 @@ require( [
   $( "header h1" ).text( authorName );
 
   var format = function( input ) {
-    var output = input;
-    output = output.replace( /`([^`]+)`/gi, '<code>$1</code>' );
-    output = output.replace( /@([\w]+)/gi, '<a rel="author" href="index.html?author=$1">@$1</a>' );
-    output = output.replace( /#([\w]+)/gi, '<a rel="topic" href="index.html?topic=$1">#$1</a>' );
+    var output = "";
+    for( var i = 0; i < input.length; i++ ) {
+      var k = input[i];
+      if( /[#@]/.test(k) ) {
+        var buffer = "";
+        for( i = i + 1; i < input.length && /\w/.test(input[i]); i++ ) {
+          buffer += input[i];
+        }
+        var key = /#/.test(k) ? "topic" : "author";
+        output += '<a rel="' + key + '" href="index.html?' + key + '=' + buffer + '">' + k + buffer + '</a>';
+        i--;
+      } else if( /`/.test(k) ) {
+        output += '<code>';
+        for( i = i + 1; i < input.length && input[i] !== '`'; i++ ) {
+          output += input[i];
+        }
+        output += '</code>';
+      } else {
+        output += k;
+      }
+    }
     return output;
   };
 
